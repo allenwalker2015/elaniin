@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PersonalInfo extends Model
 {
+    protected $primaryKey = 'id_personal_info';
     protected $fillable = [
         'phone', 'name', 'birthday',
     ];

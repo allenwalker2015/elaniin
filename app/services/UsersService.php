@@ -14,7 +14,7 @@ class UsersService
 
     public static function login($request)
     {
-        $cred = ['email' => $request->username, 'password' => $request->password];
+        $cred = ['email' => $request->email, 'password' => $request->password];
         if (!Auth::attempt($cred))
             return response()->json([
                 'message' => 'Unauthorized'

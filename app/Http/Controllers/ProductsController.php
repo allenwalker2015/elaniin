@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
 use App\Http\Requests\ProductCreationRequest;
 use App\models\Product;
 use App\services\ProductsService;
@@ -15,7 +14,7 @@ class ProductsController extends Controller
 
     public function create(ProductCreationRequest $request)
     {
-        return ProductsService::createProduct($request->all());
+        return ProductsService::createProduct($request->only(['SKU', 'nombre', 'cantidad', 'precio', 'descripcion', 'imagen']));
     }
 
     public function read(Product $product)
@@ -23,9 +22,9 @@ class ProductsController extends Controller
         return ProductsService::getProduct($product);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductCreationRequest $request, Product $product)
     {
-        return ProductsService::updateProduct($product);
+        return ProductsService::updateProduct($request->only(['SKU', 'nombre', 'cantidad', 'precio', 'descripcion', 'imagen']), $product);
     }
 
     public function delete(Product $product)

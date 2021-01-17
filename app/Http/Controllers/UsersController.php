@@ -20,7 +20,7 @@ class UsersController extends Controller
 
     public function read(Request $request)
     {
-        return UsersService::logoutUser($request->user());
+        return UsersService::getUser($request->user());
     }
 
     public function update(UserUpdateRequest $request, User $user)

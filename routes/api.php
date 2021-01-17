@@ -25,7 +25,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'product', 'middleware' => 'auth:api'], function () {
     Route::get('list', 'ProductsController@list');
-    Route::post('store', 'ProductsController@create');
+    Route::post('/store', 'ProductsController@create');
     Route::get('/{product}', 'ProductsController@read');
     Route::post('/{product}', 'ProductsController@update');
     Route::delete('/{product}', 'ProductsController@delete');
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'product', 'middleware' => 'auth:api'], function () {
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::get('list', 'UsersController@list');
-    Route::post('store', 'UsersController@create');
+    Route::post('/store', 'UsersController@create');
     Route::get('/{user}', 'UsersController@read');
     Route::post('/{user}', 'UsersController@update');
     Route::delete('/{user}', 'UsersController@delete');

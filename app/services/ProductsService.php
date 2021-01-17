@@ -8,17 +8,15 @@ use App\models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Laravel\Scout\Searchable;
 
 class ProductsService
 {
-    use Searchable;
 
     public static function createProduct($data)
     {
-        User::store($data);
+        Product::create($data);
         return response()->json([
-            'message' => 'Successfully created user!'
+            'message' => 'Successfully created product!'
         ], 201);
     }
 

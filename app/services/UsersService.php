@@ -3,12 +3,13 @@
 
 namespace App\services;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class UserService
+class UsersService
 {
 
     public static function login($request)
@@ -49,7 +50,7 @@ class UserService
         ]);
     }
 
-    public static function getCurrentUser($user)
+    public static function getUser($user)
     {
         return response()->json($user);
     }
@@ -64,10 +65,10 @@ class UserService
 
     public static function listUsers()
     {
-        return response()->json(User::all());
+        return response()->json(User::paginate(10));
     }
 
-    public static function updateUsers($data, User $user)
+    public static function updateUser($data, User $user)
     {
         $user->fill($data)->update();
         return response()->json($user);

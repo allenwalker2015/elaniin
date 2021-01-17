@@ -3,14 +3,16 @@
 
 namespace App\services;
 
+use App\models\Product;
 use App\models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Laravel\Scout\Searchable;
 
 class ProductsService
 {
-
+    use Searchable;
 
     public static function createProduct($data)
     {
@@ -26,7 +28,7 @@ class ProductsService
         return response()->json($product);
     }
 
-    public static function updateUsers($data, Product $product)
+    public static function updateProduct($data, Product $product)
     {
         $product->fill($data)->update();
         return response()->json($product);
@@ -40,9 +42,19 @@ class ProductsService
         ]);
     }
 
-    public static function listProducts()
+    public static function listProducts(Request $request)
     {
-        return response()->json(Product::all());
+        $productList = new Product();
+        $query = $request->query;
+        if ($query) {
+            if ($request->type = Product::SEARCH_BY_NAME) {
+                $productList->searchByName($query);
+
+            } else if ($request->type = Product::SEARCH_BY_SKU) {
+                $productList->searchBySKU($query);
+            }
+        }
+        return response()->json(Product::paginate(10));
     }
 
 

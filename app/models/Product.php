@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    public const SEARCH_BY_SKU = 1;
+    public const SEARCH_BY_NAME = 2;
+    protected $table = "product";
+
     protected $primaryKey = "id_product";
     /**
      * The attributes that are mass assignable.
@@ -15,5 +19,17 @@ class Product extends Model
     protected $fillable = [
         'username', 'email', 'password',
     ];
+
+
+    public function scopeSearchByName($query, $text)
+    {
+        return $this->where('name', 'like', $text);
+    }
+
+    public function scopeSearchBySKU($query, $text)
+    {
+        return $this->where('SKU', 'like', text);
+    }
+
 
 }

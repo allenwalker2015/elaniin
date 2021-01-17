@@ -18,6 +18,7 @@ class UserCreationRequest extends FormRequest
         return [
             'username' => 'required|unique:users,username|max:255',
             'birthday' => 'required|date',
+            'phone' => 'required|digits_between:3,9',
             'name' => 'required|string',
             'email' => 'required|unique:users,email|email',
             'password' => 'required|confirmed',

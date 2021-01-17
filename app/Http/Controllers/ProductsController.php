@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UserCreationRequest;
-use App\models\User;
+use App\Http\Requests\ProductCreationRequest;
+use App\models\Product;
 use App\services\ProductsService;
 use Auth;
 use Illuminate\Http\Request;
@@ -13,28 +13,30 @@ use Illuminate\Http\Request;
 class ProductsController extends Controller
 {
 
-    public function create(UserCreationRequest $request)
+    public function create(ProductCreationRequest $request)
     {
-        return ProductsService::registerNewUser($request->all());
+        return ProductsService::createProduct($request->all());
     }
 
-    public function read(Request $request)
+    public function read(Product $product)
     {
-        return ProductsService::logoutUser($request->user());
+        return ProductsService::getProduct($product);
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, Product $product)
     {
-        return ProductsService::updateUser($user);
+        return ProductsService::updateProduct($product);
     }
 
-    public function delete(User $user)
+    public function delete(Product $product)
     {
-        return ProductsService::deleteUser($user);
+        return ProductsService::deleteProduct($product);
     }
 
-    public function list()
+    public function list(Request $request)
     {
-        return ProductsService::listUsers();
+        return ProductsService::listProducts($request);
     }
+
+
 }

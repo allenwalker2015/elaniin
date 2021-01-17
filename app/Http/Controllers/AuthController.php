@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JsonRequest;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UserCreationRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\models\User;
-use App\services\ProductsService;
+use App\services\UsersService;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -14,27 +15,22 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        return ProductsService::login($request);
+        return UsersService::login($request);
     }
 
-    public function signup(UserCreationRequest $request)
+    public function signup(UserUpdateRequest $request)
     {
 
-        return ProductsService::registerNewUser($request->all());
+        return UsersService::registerNewUser($request);
     }
 
     public function logout(Request $request)
     {
-        return ProductsService::logoutUser($request->user());
+        return UsersService::logoutUser($request->user());
     }
 
     public function user(Request $request)
     {
-        return ProductsService::logoutUser($request->user());
-    }
-
-    public function delete($request)
-    {
-        return ProductsService::deleteUser($request->user());
+        return UsersService::getUser($request->user());
     }
 }

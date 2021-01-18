@@ -13,8 +13,12 @@ class ForgotPasswordController extends Controller
         return UsersService::sendResetPasswordMail($request->only('email'));
     }
 
+    public function resetPassword(){
+        return view('password.index');
+    }
     public function resetPassword(ResetPasswordRequest $request)
     {
         return UsersService::resetPassword($request->only('email', 'token', 'password'));
     }
+
 }

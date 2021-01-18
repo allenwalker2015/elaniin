@@ -41,5 +41,6 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
 
 Route::group(['prefix' => 'password'], function () {
     Route::post('sendResetMail', 'ForgotPasswordController@sendResetEmail');
+    Route::get('passReset', 'ForgotPasswordController@passReset')->name('password.reset');
     Route::post('resetPassword', 'ForgotPasswordController@resetPassword');
 });

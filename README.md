@@ -32,9 +32,9 @@ Este proyecto contiene un ejemplo basico de autenticacion mediate OAUTH2.0 usand
     
     ```php composer install```
 
-4.  Ejecutar las migraciones
+4.  Ejecutar las migraciones y seeders
 
-    ```php artisan migrate```
+    ```php artisan migrate --seed```
 
 5.  Instalar las dependencias, archivos de configuracion y generacion de llaves para la autenticacion OAUTH2.0 con Passport
 

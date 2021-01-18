@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\JsonRequest;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\models\User;
 use App\services\UsersService;
 use Auth;
@@ -18,7 +18,7 @@ class AuthController extends Controller
         return UsersService::login($request);
     }
 
-    public function signup(UserUpdateRequest $request)
+    public function signup(ResetPasswordRequest $request)
     {
 
         return UsersService::registerNewUser($request);

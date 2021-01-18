@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\models\User;
 use App\services\UsersService;
 use Auth;
@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class UsersController extends Controller
 {
 
-    public function create(UserUpdateRequest $request)
+    public function create(ResetPasswordRequest $request)
     {
         return UsersService::registerNewUser($request->all());
     }
@@ -23,7 +23,7 @@ class UsersController extends Controller
         return UsersService::getUser($request->user());
     }
 
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(ResetPasswordRequest $request, User $user)
     {
         return UsersService::updateUser($request->only('name', 'phone', 'birthday'), $user);
     }

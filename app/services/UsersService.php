@@ -3,11 +3,12 @@
 
 namespace App\services;
 
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
 
 class UsersService
 {
@@ -72,5 +73,23 @@ class UsersService
     {
         $user->fill($data)->update();
         return response()->json($user);
+    }
+
+    public static function sendResetPasswordMail($credentials)
+    {
+        Password::sendResetLink($credentials);
+        return response()->json(["message" => 'Reset password link sent on your email.']);
+    }public static function resetPassword($credentials)
+    {
+        $reset_password_status = Password::reset($credentials, function ($user, $password) {
+            $user->password = $password;
+            $user->save();
+        });
+
+        if ($reset_password_status === Password::INVALID_TOKEN) {
+            return response()->json(["msg" => "Invalid token provided"], 400);
+        }
+
+        return response()->json(["msg" => "Password has been successfully changed"]);
     }
 }

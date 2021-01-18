@@ -38,3 +38,8 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function () {
     Route::post('/{user}', 'UsersController@update');
     Route::delete('/{user}', 'UsersController@delete');
 });
+
+Route::group(['prefix' => 'password'], function () {
+    Route::post('sendResetMail', 'ForgotPasswordController@sendResetEmail');
+    Route::post('resetPassword', 'ForgotPasswordController@resetPassword');
+});

@@ -79,10 +79,12 @@ class UsersService
     {
         Password::sendResetLink($credentials);
         return response()->json(["message" => 'Reset password link sent on your email.']);
-    }public static function resetPassword($credentials)
+    }
+
+    public static function resetPassword($credentials)
     {
         $reset_password_status = Password::reset($credentials, function ($user, $password) {
-            $user->password = $password;
+            $user->password = bcrypt($password);
             $user->save();
         });
 

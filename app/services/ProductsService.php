@@ -53,6 +53,8 @@ class ProductsService
             } else if ($type == Product::SEARCH_BY_SKU) {
                 $productList = $productList->searchBySKU($query)->paginate(10);
             }
+        }else{
+            $productList = $productList->paginate(10);
         }
 
         return response()->json($productList);

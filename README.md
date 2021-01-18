@@ -40,3 +40,25 @@ Este proyecto contiene un ejemplo basico de autenticacion mediate OAUTH2.0 usand
 
     ```php passport:install```
 
+5.  Colocar las variables de entorno necesarias para la conexion a la bd y para el envio de correos
+
+    ```
+       .../
+       DB_CONNECTION=mysql
+       DB_HOST=mysql_url
+       DB_PORT=3306
+       DB_DATABASE=db_name
+       DB_USERNAME=user
+       DB_PASSWORD=password
+       /...
+       .../
+       MAIL_MAILER=smtp
+       MAIL_HOST=example.mail.server
+       MAIL_PORT=2525
+       MAIL_USERNAME= your_username
+       MAIL_PASSWORD= your_password
+       MAIL_ENCRYPTION= tls
+       /...
+    
+    ```
+

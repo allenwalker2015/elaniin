@@ -53,7 +53,7 @@ class ProductsService
                 $productList->searchBySKU(strtolower($query));
             }
         }
-        return response()->json(Product::paginate(10));
+        return response()->json($productList->paginate(10));
     }
 
 

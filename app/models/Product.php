@@ -23,12 +23,12 @@ class Product extends Model
 
     public function scopeSearchByName($query, $text)
     {
-        return $query->where('name', 'like', $text);
+        return $query->where('nombre', 'like', "%$text%");
     }
 
     public function scopeSearchBySKU($query, $text)
     {
-        return $query->where('SKU', 'like', $text);
+        return $query->where('SKU', 'like', "%$text%");
     }
 
 

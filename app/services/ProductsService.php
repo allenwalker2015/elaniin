@@ -43,17 +43,19 @@ class ProductsService
     public static function listProducts(Request $request)
     {
         $productList = new Product();
-        $query = $request->query;
+        $query = $request->get('query');
         $type = $request->type ?? Product::SEARCH_BY_NAME;
-        if ($query) {
-            if ($type === Product::SEARCH_BY_NAME) {
-                $productList->searchByName(strtolower($query));
 
-            } else if ($type === Product::SEARCH_BY_SKU) {
-                $productList->searchBySKU(strtolower($query));
+        if ($query) {
+            if ($type == Product::SEARCH_BY_NAME) {
+                $productList = $productList->searchByName($query)->paginate(10);
+
+            } else if ($type == Product::SEARCH_BY_SKU) {
+                $productList = $productList->searchBySKU($query)->paginate(10);
             }
         }
-        return response()->json($productList->paginate(10));
+
+        return response()->json($productList);
     }
 
 

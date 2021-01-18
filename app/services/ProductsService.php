@@ -44,12 +44,13 @@ class ProductsService
     {
         $productList = new Product();
         $query = $request->query;
+        $type = $request->type ?? Product::SEARCH_BY_NAME;
         if ($query) {
-            if ($request->type = Product::SEARCH_BY_NAME) {
-                $productList->searchByName($query);
+            if ($type === Product::SEARCH_BY_NAME) {
+                $productList->searchByName(strtolower($query));
 
-            } else if ($request->type = Product::SEARCH_BY_SKU) {
-                $productList->searchBySKU($query);
+            } else if ($type === Product::SEARCH_BY_SKU) {
+                $productList->searchBySKU(strtolower($query));
             }
         }
         return response()->json(Product::paginate(10));
